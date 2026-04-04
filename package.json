@@ -1,21 +1,21 @@
 {
-  "name": "vite-electron-app",
-  "version": "1.0.0",
+  "name": "create-elec-app",
+  "version": "0.1.0",
   "type": "module",
   "description": "CLI tool to scaffold Electron + Vite + React applications",
   "license": "MIT",
   "author": "João Braga",
-  "homepage": "https://github.com/vite-electron-app/vite-electron-app#readme",
+  "homepage": "https://github.com/joaomjbraga/create-elec-app#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vite-electron-app/vite-electron-app.git"
+    "url": "git+https://github.com/joaomjbraga/create-elec-app.git"
   },
   "bugs": {
-    "url": "https://github.com/vite-electron-app/vite-electron-app/issues"
+    "url": "https://github.com/joaomjbraga/create-elec-app/issues"
   },
   "main": "index.js",
   "bin": {
-    "vite-electron-app": "index.js"
+    "create-elec-app": "index.js"
   },
   "files": [
     "dist",

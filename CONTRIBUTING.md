@@ -1,4 +1,4 @@
-# Contribuindo para vite-electron-app
+# Contribuindo para create-elec-app
 
 Obrigado pelo seu interesse em contribuir!
 
@@ -14,8 +14,8 @@ Este é um projeto CLI que permite criar rapidamente aplicações desktop com El
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/joaomjbraga/vite-electron-app.git
-cd vite-electron-app
+git clone https://github.com/joaomjbraga/create-elec-app.git
+cd create-elec-app
 ```
 
 ### 2. Instale as dependências
@@ -32,7 +32,7 @@ Para testar a CLI localmente antes de publicar:
 npm link
 ```
 
-Isso permite usar `vite-electron-app` globalmente como se estivesse instalado via npm.
+Isso permite usar `create-elec-app` globalmente como se estivesse instalado via npm.
 
 ### 4. Scripts Disponíveis
 
@@ -49,16 +49,16 @@ Após linked, você pode testar a CLI:
 
 ```bash
 # Cria um novo projeto
-npx vite-electron-app meu-teste-app
+npx create-elec-app meu-teste-app
 
 # Ou use diretamente após npm link
-vite-electron-app meu-teste-app
+create-elec-app meu-teste-app
 ```
 
 ## Estrutura do Projeto
 
 ```
-vite-electron-app/
+create-elec-app/
 ├── src/                        # Código fonte da CLI
 │   ├── index.ts               # Ponto de entrada principal
 │   └── utils.ts               # Funções utilitárias
@@ -161,7 +161,7 @@ Ao reportar problemas, inclua:
 - **Ambiente**: Node.js versão, sistema operacional
 - **Versão do pacote** (se aplicável)
 
-Use o [GitHub Issues](https://github.com/joaomjbraga/vite-electron-app/issues).
+Use o [GitHub Issues](https://github.com/joaomjbraga/create-elec-app/issues).
 
 ## Dicas para Desenvolvimento
 
@@ -171,7 +171,7 @@ Para testar se o template gerado funciona corretamente:
 
 ```bash
 # 1. Crie um projeto de teste
-npx vite-electron-app test-template
+npx create-elec-app test-template
 
 # 2. Entre no projeto
 cd test-template
@@ -196,4 +196,4 @@ console.log('Debug info:', someVariable);
 
 ## Perguntas?
 
-Sinta-se à vontade para abrir uma [discussion](https://github.com/joaomjbraga/vite-electron-app/discussions) ou issue para qualquer pergunta!
+Sinta-se à vontade para abrir uma [discussion](https://github.com/joaomjbraga/create-elec-app/discussions) ou issue para qualquer pergunta!

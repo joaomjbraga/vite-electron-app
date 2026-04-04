@@ -1,22 +1,22 @@
 <p align="center">
-  <img src=".github/logo.svg" alt="vite-electron-app" width="200"/>
+  <img src=".github/logo.svg" alt="create-elec-app" width="200"/>
 </p>
 
-<h1 align="center">vite-electron-app</h1>
+<h1 align="center">create-elec-app</h1>
 
 <p align="center">
   CLI tool para criar rapidamente aplicações desktop com Electron + Vite + React + TypeScript
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/vite-electron-app">
-    <img src="https://img.shields.io/npm/v/vite-electron-app?style=flat-square" alt="npm version">
+  <a href="https://www.npmjs.com/package/create-elec-app">
+    <img src="https://img.shields.io/npm/v/create-elec-app?style=flat-square" alt="npm version">
   </a>
-  <a href="https://www.npmjs.com/package/vite-electron-app">
-    <img src="https://img.shields.io/npm/dm/vite-electron-app?style=flat-square" alt="npm downloads">
+  <a href="https://www.npmjs.com/package/create-elec-app">
+    <img src="https://img.shields.io/npm/dm/create-elec-app?style=flat-square" alt="npm downloads">
   </a>
-  <a href="https://github.com/vite-electron-app/vite-electron-app/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/vite-electron-app/vite-electron-app?style=flat-square" alt="license">
+  <a href="https://github.com/create-elec-app/create-elec-app/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/create-elec-app/create-elec-app?style=flat-square" alt="license">
   </a>
 </p>
 
@@ -44,10 +44,10 @@
 
 ```bash
 # Usando npx (recomendado)
-npx vite-electron-app meu-app
+npx create-elec-app meu-app
 
 # Ou instale globalmente
-npm install -g vite-electron-app
+npm install -g create-elec-app
 create meu-app
 
 # Entre no projeto
@@ -96,12 +96,12 @@ pnpm dev
 
 ```bash
 # Sintaxe básica
-npx vite-electron-app <nome-do-projeto>
+npx create-elec-app <nome-do-projeto>
 
 # Exemplos
-npx vite-electron-app my-electron-app
-npx vite-electron-app desktop-app
-npx vite-electron-app agenda-eletronica
+npx create-elec-app my-electron-app
+npx create-elec-app desktop-app
+npx create-elec-app agenda-eletronica
 ```
 
 ### Opções do Projeto
@@ -418,7 +418,7 @@ Contribuições são bem-vindas! Para contribuir:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/vite-electron-app/vite-electron-app.git
+git clone https://github.com/create-elec-app/create-elec-app.git
 cd electron-vite-starter
 
 # Instale dependências
