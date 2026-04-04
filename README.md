@@ -444,10 +444,3 @@ Este projeto está sob a licença [MIT](https://opensource.org/licenses/MIT).
 **João Braga**
 
 - GitHub: [@joaomjbraga](https://github.com/joaomjbraga)
-- npm: [@vite-electron-app](https://www.npmjs.com/~vite-electron-app)
-
----
-
-<p align="center">
-  Feito com ❤️ e ☕
-</p>
