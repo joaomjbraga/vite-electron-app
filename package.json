@@ -1,0 +1,59 @@
+{
+  "name": "vite-electron-app",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "CLI tool to scaffold Electron + Vite + React applications",
+  "license": "MIT",
+  "author": "João Braga",
+  "homepage": "https://github.com/vite-electron-app/vite-electron-app#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vite-electron-app/vite-electron-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vite-electron-app/vite-electron-app/issues"
+  },
+  "main": "index.js",
+  "bin": {
+    "vite-electron-app": "index.js"
+  },
+  "files": [
+    "dist",
+    "electron",
+    "template-*/**",
+    "index.js",
+    "README.md"
+  ],
+  "keywords": [
+    "electron",
+    "vite",
+    "react",
+    "typescript",
+    "starter",
+    "boilerplate",
+    "desktop",
+    "scaffold",
+    "create"
+  ],
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "watch": "vite build --watch",
+    "build": "vite build",
+    "test": "vitest run",
+    "prepublishOnly": "pnpm build && pnpm test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "@types/prompts": "^2.4.9",
+    "electron": "^41.1.1",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.3",
+    "vitest": "^4.1.2"
+  }
+}
