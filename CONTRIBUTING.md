@@ -2,7 +2,7 @@
 
 Obrigado pelo seu interesse em contribuir!
 
-Este é um projeto CLI que permite criar rapidamente aplicações desktop com Electron + Vite + React + TypeScript.贡献是受欢迎的！
+Este é um projeto CLI que permite criar rapidamente aplicações desktop com Electron + Vite + React + TypeScript
 
 ## Pré-requisitos
 
