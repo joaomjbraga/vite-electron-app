@@ -15,15 +15,9 @@ process.env.VITE_PUBLIC = VITE_PUBLIC
 
 let win: BrowserWindow | null = null
 
-function getIconPath(): string {
-  if (process.platform === 'win32') return path.join(VITE_PUBLIC, 'icon.ico')
-  if (process.platform === 'linux') return path.join(VITE_PUBLIC, 'icon.png')
-  return path.join(VITE_PUBLIC, 'icon.icns')
-}
 
 function createWindow(): void {
   win = new BrowserWindow({
-    icon: getIconPath(),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
       contextIsolation: true,
@@ -44,15 +38,10 @@ function createWindow(): void {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
-
 app.on('activate', () => {
-  if (win === null) createWindow()
-  else win.show()
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow()
+  }
 })
 
-app.whenReady()
-  .then(createWindow)
-  .catch((err) => {
-    console.error('[main] Falha ao inicializar o app:', err)
-    app.quit()
-  })
+app.whenReady().then(createWindow)
