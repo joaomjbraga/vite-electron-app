@@ -113,3 +113,6 @@ electron-vite-test
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+# IDE
+.vscode/
