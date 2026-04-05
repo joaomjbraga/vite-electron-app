@@ -14,13 +14,9 @@ process.env.VITE_PUBLIC = VITE_PUBLIC
 
 let win: BrowserWindow | null = null
 
-function getIconPath(): string {
-  return path.join(VITE_PUBLIC, 'electron-vite.svg')
-}
-
 function createWindow(): void {
   win = new BrowserWindow({
-    icon: getIconPath(),
+    icon: path.join(VITE_PUBLIC, 'icon.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
       contextIsolation: true,
