@@ -41,6 +41,12 @@ Isso permite usar `vite-electron-app` globalmente como se estivesse instalado vi
 | `pnpm dev` | Inicia o desenvolvimento (watch mode) |
 | `pnpm build` | Gera build de produção |
 | `pnpm test` | Executa os testes (inclui build automático) |
+| `pnpm test:unit` | Executa apenas testes unitários |
+| `pnpm test:integration` | Executa apenas testes de integração |
+| `pnpm test:e2e` | Executa testes E2E com Playwright |
+| `pnpm test:e2e:ui` | Executa testes E2E com interface visual |
+| `pnpm test:e2e:headed` | Executa testes E2E no browser |
+| `pnpm coverage` | Executa testes com report de coverage |
 | `pnpm watch` | Watch mode para build |
 
 ### 5. Teste localmente
@@ -79,7 +85,8 @@ vite-electron-app/
 │
 ├── __tests__/                  # Testes
 │   ├── unit/                  # Testes unitários
-│   └── integration/           # Testes de integração
+│   ├── integration/           # Testes de integração
+│   └── e2e/                  # Testes E2E (Playwright)
 │
 └── .github/workflows/         # Workflows CI/CD
 ```
@@ -128,6 +135,34 @@ window.electronAPI.nomeHandler('meu-param')
 
 ```bash
 pnpm test
+```
+
+### Coverage
+
+O projeto usa Vitest com V8 coverage provider. Threshold mínimo: 80%.
+
+```bash
+# Gera report de coverage
+pnpm coverage
+```
+
+Os reports são gerados em:
+- `coverage/` - Report HTML
+- `coverage/lcov.info` - Para integração com Codecov
+
+### Testes E2E
+
+Os testes E2E usam Playwright para verificar se o projeto gerado funciona corretamente.
+
+```bash
+# Executa testes E2E
+pnpm test:e2e
+
+# Com interface visual
+pnpm test:e2e:ui
+
+# No browser (headed mode)
+pnpm test:e2e:headed
 ```
 
 ### 4. Build (se aplicável)

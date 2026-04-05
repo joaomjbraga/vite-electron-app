@@ -108,3 +108,8 @@ dist
 index.cjs
 # e2e test
 electron-vite-test
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/

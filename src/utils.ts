@@ -32,17 +32,6 @@ export function toValidPackageName(projectName: string): string {
     .replace(/[^a-z\d\-~]+/g, '-')
 }
 
-export function pkgFromUserAgent(userAgent: string | undefined): { name: string; version: string } | undefined {
-  if (!userAgent) return undefined
-  const pkgSpec = userAgent.split(' ')[0]
-  const pkgSpecArr = pkgSpec.split('/')
-  if (pkgSpecArr.length < 2) return undefined
-  return {
-    name: pkgSpecArr[0],
-    version: pkgSpecArr[1],
-  }
-}
-
 export function emptyDir(dir: string): void {
   if (!fs.existsSync(dir)) {
     return
