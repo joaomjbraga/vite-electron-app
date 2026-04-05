@@ -182,14 +182,13 @@ function setupElectron(root: string) {
     json.devDependencies.electron = pkg.devDependencies.electron
     json.devDependencies['electron-builder'] = pkg.devDependencies['electron-builder']
     json.devDependencies['vite-plugin-electron'] = pkg.devDependencies['vite-plugin-electron']
-    json.devDependencies['vite-plugin-electron-renderer'] = pkg.devDependencies['vite-plugin-electron-renderer']
     return JSON.stringify(json, null, 2) + '\n'
   })
 
   const snippets = `
 window.ipcRenderer.on('main-process-message', (_event, message) => {
   console.log(message)
-}
+});
 `
 
   editFile(path.join(root, 'src/main.tsx'), content => {
@@ -206,7 +205,6 @@ window.ipcRenderer.on('main-process-message', (_event, message) => {
       preload: {
         input: path.join(process.cwd(), 'electron/preload.ts'),
       },
-      renderer: {},
     })`
 
   editFile(path.join(root, 'vite.config.ts'), content => {
