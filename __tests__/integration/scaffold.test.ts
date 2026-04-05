@@ -49,10 +49,12 @@ describe('Scaffold Integration', () => {
     expect(fs.existsSync(path.join(projectDir, 'src/App.tsx'))).toBe(true)
   })
 
-  it('should create public directory with assets', () => {
+  it('should create public directory with icons', () => {
     runCli()
     expect(fs.existsSync(path.join(projectDir, 'public'))).toBe(true)
-    expect(fs.existsSync(path.join(projectDir, 'public/vite.svg'))).toBe(true)
+    expect(fs.existsSync(path.join(projectDir, 'public/icon.png'))).toBe(true)
+    expect(fs.existsSync(path.join(projectDir, 'public/icon.ico'))).toBe(true)
+    expect(fs.existsSync(path.join(projectDir, 'public/icon.icns'))).toBe(true)
   })
 
   it('should create package.json with electron dependencies', () => {
