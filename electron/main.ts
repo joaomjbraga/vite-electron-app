@@ -7,32 +7,36 @@ process.env.APP_ROOT = path.join(__dirname, '..')
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist')
 
+// 📁 Em dev aponta para /public, em produção para /dist
 const VITE_PUBLIC = VITE_DEV_SERVER_URL
   ? path.join(process.env.APP_ROOT, 'public')
   : RENDERER_DIST
 
 process.env.VITE_PUBLIC = VITE_PUBLIC
 
-let win: BrowserWindow | null
+let win: BrowserWindow | null = null
 
 function getIconPath(): string {
-  if (process.platform === 'win32') return path.join(VITE_PUBLIC, 'icon.ico') // Windows
-  if (process.platform === 'linux') return path.join(VITE_PUBLIC, 'icon.png') // Linux
-  return path.join(VITE_PUBLIC, 'icon.icns')                                  // macOS
+  if (process.platform === 'win32') return path.join(VITE_PUBLIC, 'icon.ico')
+  if (process.platform === 'linux') return path.join(VITE_PUBLIC, 'icon.png')
+  return path.join(VITE_PUBLIC, 'icon.icns')
 }
 
-function createWindow() {
+function createWindow(): void {
   win = new BrowserWindow({
     icon: getIconPath(),
     webPreferences: {
-      preload: path.join(__dirname, 'preload.mjs'), // Script executado antes do renderer
-      contextIsolation: true,  // Isola os contextos JS do main e do renderer (segurança)
-      nodeIntegration: false,  // Impede acesso direto às APIs do Node no renderer
-      sandbox: true,           // Restringe ainda mais as permissões do renderer
+      preload: path.join(__dirname, 'preload.mjs'),
+      contextIsolation: true,  // 🔒 Isola o contexto do renderer
+      nodeIntegration: false,  // 🔒 Desabilita Node.js no renderer — use o preload
+      sandbox: true,           // 🔒 Sandboxing adicional recomendado pelo Electron
     },
   })
 
-  // Em dev, carrega direto do servidor Vite (HMR); em prod, serve o HTML compilado
+  // Libera a referência ao fechar (evita memory leak)
+  win.on('closed', () => { win = null })
+
+  // Em dev carrega o servidor Vite (HMR), em produção serve o build
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL).catch(console.error)
   } else {
@@ -40,18 +44,20 @@ function createWindow() {
   }
 }
 
-// No macOS o app permanece ativo mesmo sem janelas abertas (comportamento padrão do sistema)
+// No macOS o app permanece ativo mesmo sem janelas abertas
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-    win = null
-  }
-})
-// No macOS, recriar a janela ao clicar no ícone do dock quando não há janelas abertas
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
+  if (process.platform !== 'darwin') app.quit()
 })
 
-app.whenReady().then(createWindow)
+// No macOS, recriar a janela ao clicar no ícone do dock
+app.on('activate', () => {
+  if (win === null) createWindow()
+  else win.show()
+})
+
+app.whenReady()
+  .then(createWindow)
+  .catch((err) => {
+    console.error('[main] Falha ao inicializar o app:', err)
+    app.quit()
+  })
