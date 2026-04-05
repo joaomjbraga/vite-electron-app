@@ -7,7 +7,6 @@ process.env.APP_ROOT = path.join(__dirname, '..')
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist')
 
-// 📁 Em dev aponta para /public, em produção para /dist
 const VITE_PUBLIC = VITE_DEV_SERVER_URL
   ? path.join(process.env.APP_ROOT, 'public')
   : RENDERER_DIST
@@ -27,16 +26,14 @@ function createWindow(): void {
     icon: getIconPath(),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
-      contextIsolation: true,  // 🔒 Isola o contexto do renderer
-      nodeIntegration: false,  // 🔒 Desabilita Node.js no renderer — use o preload
-      sandbox: true,           // 🔒 Sandboxing adicional recomendado pelo Electron
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: true,
     },
   })
 
-  // Libera a referência ao fechar (evita memory leak)
   win.on('closed', () => { win = null })
 
-  // Em dev carrega o servidor Vite (HMR), em produção serve o build
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL).catch(console.error)
   } else {
@@ -44,12 +41,10 @@ function createWindow(): void {
   }
 }
 
-// No macOS o app permanece ativo mesmo sem janelas abertas
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-// No macOS, recriar a janela ao clicar no ícone do dock
 app.on('activate', () => {
   if (win === null) createWindow()
   else win.show()

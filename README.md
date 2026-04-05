@@ -70,6 +70,7 @@ pnpm dev
 - 🔷 **TypeScript Nativo** - Código tipado do início ao fim
 - ⚛️ **React Moderno** - Com Vite para desenvolvimento ágil
 - 🔐 **Seguro por Padrão** - Configurações de segurança otimizadas
+- 🔗 **Suporte a Links Externos** - API IPC documentada para abrir URLs no navegador
 - 🛡️ **Proteção contra Arquivos Perigosos** - Bloqueia .env, chaves, certificados
 - 🧩 **Electron Builder** - Empacotamento para Windows, macOS e Linux
 - 📁 **Estrutura Organizada** - Separação clara de responsabilidades
@@ -250,11 +251,23 @@ A comunicação entre processos é feita via `contextBridge`:
 
 ```typescript
 // electron/preload.ts
-contextBridge.exposeInMainWorld('ipcRenderer', {
-  on: (channel, listener) => ipcRenderer.on(channel, listener),
-  send: (channel, ...args) => ipcRenderer.send(channel, ...args),
-  invoke: (channel, ...args) => ipcRenderer.invoke(channel, ...args),
+contextBridge.exposeInMainWorld('electronAPI', {
+  openExternal: (url: string) => ipcRenderer.invoke('open-external', url),
 })
+```
+
+**No main process:**
+```typescript
+import { ipcMain, shell } from 'electron'
+
+ipcMain.handle('open-external', async (_, url: string) => {
+  await shell.openExternal(url)
+})
+```
+
+**No renderer:**
+```typescript
+window.electronAPI.openExternal('https://exemplo.com')
 ```
 
 ---

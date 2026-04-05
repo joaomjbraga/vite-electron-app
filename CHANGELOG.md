@@ -5,6 +5,21 @@ Todas as alterações significativas deste projeto serão documentadas neste arq
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-04-05
+
+### Adicionado
+
+- Funcionalidade de abertura de links externos via IPC
+- Handler `open-external` no main process usando `shell.openExternal`
+- Suporte a `contextBridge` para comunicação segura renderer-main
+- Template atualizado com estrutura para links externos
+- Comentários documentados explicando padrão IPC
+
+### Alterado
+
+- Template `preload.ts` com estrutura documentada para exposição de APIs
+- Comentários mais claros no código para facilitar customização
+
 ## [1.2.0] - 2026-04-05
 
 ### Corrigido

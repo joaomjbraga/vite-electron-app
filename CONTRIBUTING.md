@@ -99,6 +99,31 @@ git checkout -b fix/meu-bug
 - CLI: Edite os arquivos em `src/`
 - Template: Edite os arquivos em `electron/` e `template-react-ts/`
 
+### Adicionando Handlers IPC
+
+O template Electron utiliza comunicação segura via IPC (Inter-Process Communication):
+
+**No main process (`electron/main.ts`):**
+```typescript
+import { ipcMain, shell } from 'electron'
+
+ipcMain.handle('nome-do-handler', async (_, param: string) => {
+  // Lógica do handler
+})
+```
+
+**No preload (`electron/preload.ts`):**
+```typescript
+contextBridge.exposeInMainWorld('electronAPI', {
+  nomeHandler: (param: string) => ipcRenderer.invoke('nome-do-handler', param),
+})
+```
+
+**No renderer:**
+```typescript
+window.electronAPI.nomeHandler('meu-param')
+```
+
 ### 3. Execute os testes
 
 ```bash

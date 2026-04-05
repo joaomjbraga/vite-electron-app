@@ -18,4 +18,3 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     return ipcRenderer.off(channel, listener)
   },
 })
-// ---------------------------------------------------------------------------
