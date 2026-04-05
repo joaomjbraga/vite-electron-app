@@ -3,10 +3,10 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import prompts from 'prompts'
 import {
-  isEmpty,
-  emptyDir,
   copy,
   editFile,
+  emptyDir,
+  isEmpty,
   isValidPackageName,
   toValidPackageName,
 } from './utils.js'
@@ -32,7 +32,7 @@ const log = {
 const cwd = process.cwd()
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const argTargetDir = process.argv.slice(2).join(' ')
-const defaultTargetDir = 'electron-vite-project'
+const defaultTargetDir = 'project name'
 const renameFiles: Record<string, string | undefined> = {
   _gitignore: '.gitignore',
 }
@@ -150,7 +150,7 @@ async function init() {
   log.info(`Scaffolding project in ${root}...`)
 
   let pkgManager = 'npm'
-  
+
   if (fs.existsSync(path.join(cwd, 'pnpm-lock.yaml'))) {
     pkgManager = 'pnpm'
   } else if (fs.existsSync(path.join(cwd, 'yarn.lock'))) {
@@ -235,11 +235,11 @@ function setupElectron(root: string) {
   const sourceDir = path.resolve(__dirname, '..', 'electron')
   const electronDir = path.join(root, 'electron')
   const electronPkgPath = path.resolve(__dirname, '..', 'electron/package.json')
-  
+
   if (!fs.existsSync(electronPkgPath)) {
     throw new Error('electron/package.json not found')
   }
-  
+
   let electronPkgContent: string
   try {
     electronPkgContent = fs.readFileSync(electronPkgPath, 'utf-8')
@@ -296,21 +296,21 @@ function setupElectron(root: string) {
     }
     const hasPathImport = /import\s+path\s+from\s+['"]node:path['"]/.test(content)
     const hasElectronImport = /import\s+electron\s+from\s+['"]vite-plugin-electron\/simple['"]/.test(content)
-    
+
     const pluginMatch = content.match(/plugins:\s*\[([\s\S]*)\]/)
     if (pluginMatch && !pluginMatch[1].includes('vite-plugin-electron')) {
       const pluginsContent = pluginMatch[1].trim()
-      const newPluginsContent = pluginsContent 
+      const newPluginsContent = pluginsContent
         ? `${pluginsContent}, ${electronPlugin}`
         : electronPlugin
       content = content.replace(pluginMatch[0], `plugins: [${newPluginsContent}]`)
-      
+
       const lines = content.split('\n')
-      const importInsertIndex = lines.findIndex((line, i) => 
+      const importInsertIndex = lines.findIndex((line, i) =>
         i > 0 && line.trim() === '' && lines[i - 1].trim().startsWith('import ') &&
         !lines[i + 1]?.trim().startsWith('import ')
       )
-      
+
       if (importInsertIndex !== -1) {
         const newImports: string[] = []
         if (!hasPathImport) {
